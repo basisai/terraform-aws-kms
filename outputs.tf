@@ -1,3 +1,8 @@
+output "terraform_key_arm" {
+  description = "ARN of the key created"
+  value       = aws_kms_key.terraform.arn
+}
+
 output "terraform_key_alias" {
   description = "Key alias for the KMS key used for Terraform operations"
   value       = aws_kms_alias.terraform.name
