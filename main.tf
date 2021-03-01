@@ -24,11 +24,18 @@ data "aws_iam_policy_document" "iam_key_policy" {
   }
 }
 
+data "aws_iam_policy_document" "combined_key_policy" {
+  source_policy_documents = concat(
+    [data.aws_iam_policy_document.iam_key_policy.json],
+    var.key_policy_statements,
+  )
+}
+
 resource "aws_kms_key" "terraform" {
   description             = "Used for encrypting secrets for Terraforming"
   deletion_window_in_days = 30
   enable_key_rotation     = true
-  policy                  = data.aws_iam_policy_document.iam_key_policy.json
+  policy                  = data.aws_iam_policy_document.combined_key_policy.json
 
   tags = var.tags
 
