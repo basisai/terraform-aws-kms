@@ -17,3 +17,9 @@ variable "create_all_keys_policy" {
   description = "Create the all keys policy"
   default     = true
 }
+
+variable "key_policy_statements" {
+  description = "Additional statements for the key policies."
+  type        = list(string)
+  default     = []
+}
