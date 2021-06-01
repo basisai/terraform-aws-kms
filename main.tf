@@ -38,10 +38,6 @@ resource "aws_kms_key" "terraform" {
   policy                  = data.aws_iam_policy_document.combined_key_policy.json
 
   tags = var.tags
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "aws_kms_alias" "terraform" {
